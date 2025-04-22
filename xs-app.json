@@ -1,0 +1,53 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/scim/(.*)$",
+      "target": "/scim/$1",
+      "destination": "IAS_SCIM_API",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/odata/v2/(.*)$",
+      "target": "/odata/v2/$1",
+      "destination": "provisioneshana",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/sap/opu/odata/sap/(.*)$",
+      
+      "target": "/sap/opu/odata/sap/$1",
+      "destination": "ERP_CLARO_HTTP",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/browser/(.*)$",
+      "target": "/browser/$1",
+      "destination": "DMS_DESTINATION",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
