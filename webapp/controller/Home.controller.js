@@ -13,7 +13,7 @@ sap.ui.define([
         Filter,
         FilterOperator) {
         "use strict";
-
+        //prueba CI/CD
         let that
         let provisionModel, oModel, viewModel, empleadoModel, provisionSAPModel, asignacionModel
 
