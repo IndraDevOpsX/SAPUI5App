@@ -1,0 +1,141 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <VBox>
+        <form:Form editable="true" binding="{/Busqueda}">
+            <form:formContainers>
+                <form:FormContainer >
+                    <form:formElements>
+                       <form:FormElement>
+                            <form:fields>
+                                <Input 
+                                    id="idInputSolicitud"
+                                    value="{codigoSolicitud}"
+                                    showSuggestion="true"
+                                    placeholder="Ingrese nro solicitud"
+                                    busyIndicatorDelay="0"
+                                    filterSuggests="false"
+                                    suggest="onSuggestIdProvision"
+                                    suggestionItems="{
+                                        path:'/provisiones',
+                                        limit:10
+                                    }">
+                                    <core:ListItem text="{idProvision}" key="{idProvision}" />
+                                </Input>
+                            </form:fields>
+                            <form:label>
+                                <Label text="Nro. de Solicitud" design="Bold" />
+                            </form:label>
+                        </form:FormElement>
+                        <!-- <form:FormElement>
+                            <form:fields>
+                                <DateRangeSelection
+                                    id="DRS1"
+                                    />
+                            </form:fields>
+                            <form:label>
+                                <Label text="Fecha de Registro" design="Bold" />
+                            </form:label>
+                        </form:FormElement> -->
+                        <form:FormElement>
+                            <form:fields>
+                                <DateRangeSelection
+                                    id="DRS2"
+                                    value= '{
+                                        type: "sap.ui.model.type.DateInterval",
+                                        parts: [{
+                                            type: "sap.ui.model.type.Date",
+                                            path: "fechaEnvioS",
+                                            formatOptions: {
+                                                source: {
+                                                    pattern: "yyyy-MM-dd"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: "sap.ui.model.type.Date",
+                                            path:"fechaEnvioE",
+                                            formatOptions: {
+                                            source: {
+                                                pattern: "yyyy-MM-dd"
+                                            }
+                                        }}]
+                                    }'
+                                    />
+                            </form:fields>
+                            <form:label>
+                                <Label text="Fecha de Envío" design="Bold" />
+                            </form:label>
+                        </form:FormElement>
+						<form:FormElement>
+								<form:fields>
+									<DatePicker
+										id="idDpPeriodo"
+                                        placeholder="mm/yyyy"
+										value="{
+											'path': 'periodoCierre',
+											'type': 'sap.ui.model.type.Date',
+											'formatOptions': {
+												'pattern': 'MM-y'
+											}
+										}"/>
+								</form:fields>
+								<form:label>
+									<Label text="Periodo de Cierre" design="Bold"/>
+								</form:label>
+						</form:FormElement>
+                        <!-- <form:FormElement>
+                            <form:fields>
+                            <ComboBox
+                                items="{
+                                    path: '/GerenciasJefaturas'
+                                }"
+                                selectedKey="{gerenciaJefaturaSolicitante_ID}">
+                                        <core:Item key="{UnidadOrg}" text="{UnidadOrg} - {DescUnidadOrg}"></core:Item>
+                            </ComboBox>
+                            </form:fields>
+                            <form:label>
+                                <Label text="{i18n>gerenciaJefatura}" design="Bold" />
+                            </form:label>
+                        </form:FormElement> -->
+                        <form:FormElement>
+                            <form:fields>
+                            <MultiComboBox
+                                id="mcbEstados"
+                                items="{
+                                    path: '/EstadosProvision'
+                                }"
+                                selectedKeys="{idEstadoProvision_idEstadoProvision}"
+                                showSelectAll="true">
+                                    <items>
+                                        <core:Item key="{idEstadoProvision}" text="{descripcion}"></core:Item>
+                                    </items>
+                            </MultiComboBox>
+                            </form:fields>
+                            <form:label>
+                                <Label text="Estado" design="Bold" />
+                            </form:label>
+                        </form:FormElement>
+                        
+                    </form:formElements>
+                    <form:formElements>
+                        <form:FormElement label="">
+                            <Button class="sapUiSmallMarginTop"  type="Negative" text="Buscar" icon="sap-icon://search" press="onGetSolicitudesFiltradas"/>
+                            <Button class="sapUiSmallMarginTop"  type="Reject" text="Limpiar" icon="sap-icon://clear-filter" press="onLimpiarBusqueda"/>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+            <form:layout>
+                <form:ColumnLayout
+                    columnsL="3"
+                    columnsM="2"
+                    columnsXL="4"
+                    emptyCellsLarge="1"
+                    labelCellsLarge="3"/>
+            </form:layout>
+        </form:Form>
+    </VBox>
+
+</core:FragmentDefinition>

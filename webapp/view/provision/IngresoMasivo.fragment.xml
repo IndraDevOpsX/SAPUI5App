@@ -1,0 +1,55 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+>
+<!-- <f:Form editable="true" id="frmIngresoMontos" visible="{= ${estadoSolicitud_codigo} === 1}"> -->
+<f:Form editable="true" id="frmIngresoMontos">
+            <f:formContainers>
+                <f:FormContainer >
+                    <f:formElements>
+						<f:FormElement label="Suba su archivo">
+							<f:fields>
+								<u:FileUploader
+									id="fileUploaderProv"
+                                    width="80%"
+                                    icon="sap-icon://excel-attachment"
+                                    change="onCargarArchivo"
+                                    buttonText="Navegar"
+                                    fileType="xlsx,xls"
+									name="myFileUpload"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Descargar Plantilla">
+							<f:fields>
+								<Button type="Negative"
+										icon="sap-icon://download"
+                                        width="50%"
+										press="onDescargarPlantilla"/>
+							</f:fields>
+						</f:FormElement>
+                    </f:formElements>
+                    <f:formElements>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+            <f:layout>
+                <f:ColumnLayout
+                    columnsL="2"
+                    columnsM="2"
+                    columnsXL="4"
+                    emptyCellsLarge="1"
+                    labelCellsLarge="3"/>
+            </f:layout>
+        </f:Form>
+        <MessageStrip
+            visible="true"
+            text="{pageModel2>/messageMasivo}"
+            type="Warning"
+            enableFormattedText="true"
+            showIcon="true"
+            showCloseButton="true"
+            class="sapUiMediumMarginBottom">
+        </MessageStrip>
+</c:FragmentDefinition>

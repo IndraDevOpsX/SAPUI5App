@@ -1,0 +1,37 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:uic="sap.suite.ui.commons"
+>
+
+		<uic:ProcessFlow
+			id="processflow1"
+			scrollable="false"
+			foldedCorners="true"
+			nodes="{/nodes}"
+			lanes="{/lanes}"
+			headerPress="onHeaderPress">
+			<uic:nodes>
+				<uic:ProcessFlowNode
+					laneId="{lane}"
+					nodeId="{id}"
+					title="{title}"
+					titleAbbreviation="{titleAbbreviation}"
+					children="{children}"
+					state="{state}"
+					stateText="{stateText}"
+					texts="{texts}"
+					highlighted="{highlighted}"
+					focused="{focused}" />
+			</uic:nodes>
+			<uic:lanes>
+				<uic:ProcessFlowLaneHeader
+					laneId="{id}"
+					iconSrc="{icon}"
+					state="{state}"
+					text="{label}"
+					position="{position}" />
+			</uic:lanes>
+		</uic:ProcessFlow>
+
+</c:FragmentDefinition>

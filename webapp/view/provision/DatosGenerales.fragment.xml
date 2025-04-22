@@ -1,0 +1,91 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+>
+	<VBox >
+		<f:Form editable="true" id="frmDatosGenerales">
+			<f:formContainers>
+				<f:FormContainer >
+					<f:formElements>
+						<f:FormElement label="{i18n>direccion}">
+							<f:fields>
+                                <ComboBox
+									id="cbDireccionCab"
+									items="{
+										path: 'aDireccion>/'
+									}"
+									selectedKey="{provisionCabModel>/direccion_ID}"
+									change="getResponsable"
+									enabled="{= 
+                                                ${provisionCabModel>/idEstadoProvision_idEstadoProvision} === 2 
+                                                &amp;&amp; !${provisionCabModel>/indicadorProvision}
+                                            }">
+										<c:Item key="{aDireccion>direccion_ID}" text="{aDireccion>nombreDireccion}"></c:Item>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>usuarioresponsable}">
+							<f:fields>
+                                <ComboBox
+									id="cbResponsableCab"
+									showSecondaryValues= "true"
+									selectedKey="{provisionCabModel>/responsable}"
+									items="{
+										path: 'aResponsable>/'
+									}"
+									change="getRubros"
+									 enabled="{= 
+                                                ${provisionCabModel>/idEstadoProvision_idEstadoProvision} === 2 
+                                                &amp;&amp; !${provisionCabModel>/indicadorProvision}
+                                            }">
+										<c:ListItem key="{aResponsable>responsable}" text="{aResponsable>nomCompletoResponsable}" additionalText="{aResponsable>responsable}" />
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Periodo de Cierre">
+							<f:fields>
+								<DatePicker
+                                    id="idDpPeriodo"
+                                    placeholder="mm/yyyy"
+                                    change="onChangeNoProvision"
+                                    editable="{= 
+                                                ${provisionCabModel>/idEstadoProvision_idEstadoProvision} === 2 
+                                                &amp;&amp; !${provisionCabModel>/indicadorProvision}
+                                            }"
+                                    value="{
+                                        'path': 'provisionCabModel>/periodoCierre',
+                                        'type': 'sap.ui.model.type.Date',
+                                        'formatOptions': {
+                                            'pattern': 'MM-y'
+                                        }
+                                    }"/>
+							</f:fields>
+						</f:FormElement>
+						<!-- <f:FormElement label="No Provisionaré">
+							<f:fields>
+								<Switch 
+                                    enabled="{= 
+                                                ${provisionCabModel>/idEstadoProvision_idEstadoProvision} === 2 
+                                                &amp;&amp; !${provisionCabModel>/indicadorProvision}
+                                            }"
+                                    change="onChangeNoProvision" 
+                                    type="AcceptReject" 
+                                    state="{provisionCabModel>/indicadorNoProvision}" ></Switch>
+							</f:fields>
+						</f:FormElement> -->
+					</f:formElements>
+					<f:formElements></f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+			<f:layout>
+				<f:ColumnLayout
+                    columnsL="3"
+                    columnsM="2"
+                    columnsXL="4"
+                    emptyCellsLarge="1"
+                    labelCellsLarge="3"/>
+			</f:layout>
+		</f:Form>
+	</VBox>
+</c:FragmentDefinition>

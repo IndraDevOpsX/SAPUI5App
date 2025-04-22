@@ -1,0 +1,431 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+>
+<f:Form id="FormChange354wideDual"
+			editable="true" binding="{}">
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="4"
+					labelSpanM="12"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="0"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="2"
+					columnsM="2"
+					singleContainerFullSize="false"  />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer title="">
+					<f:formElements>     
+                        <!-- <f:FormElement>
+                            <f:fields>
+								<ComboBox
+									id="cbDireccion"
+									items="{
+										path: 'oDireccion>/'
+									}"
+									selectedKey="{provisionCabModel>/direccion_ID}"
+									change="getAreas">
+										<c:Item key="{oDireccion>direccion_ID/direccion_ID}" text="{oDireccion>direccion_ID/nombreDireccion}"></c:Item>
+								</ComboBox>
+                            </f:fields>
+                            <f:label>
+                                <Label text="{i18n>direccion}" />
+                            </f:label>
+                        </f:FormElement>
+
+                        <f:FormElement>
+                            <f:fields>
+                            <ComboBox
+								id="cbAreas"
+                                items="{
+                                    path: 'oAreas>/'
+                                }"
+								change="getRubro"
+                                selectedKey="{provisionCabModel>/area}">
+									<c:Item key="{oAreas>area_ID_area_ID}" text="{oAreas>area_ID/nombreArea}"></c:Item>
+                            </ComboBox>
+                            </f:fields>
+                            <f:label>
+                                <Label text="{i18n>area}" />
+                            </f:label>
+                        </f:FormElement> -->
+
+						<!-- <f:FormElement label="Usuario Responsable">
+							<f:fields>
+								<Input id="txtResponsable" value="{provisionDetModel>/usuarioResponsable}" editable="false"/>
+							</f:fields>
+						</f:FormElement> -->
+						
+						<f:FormElement label="Tipo de Pago">
+							<f:fields>
+								<ComboBox
+									id="cboTipoPago"
+									items="{
+										path: '/TiposPago'
+									}"
+									selectedKey="{provisionDetModel>/idTipoPago_idTipoPago}">
+											<c:Item key="{idTipoPago}" text="{descripcion}"></c:Item>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						
+                        <f:FormElement>
+                            <f:fields>
+								<ComboBox
+									id="cboProvisionConOc"
+									selectedKey="{provisionDetModel>/provisionConOC}"
+									change="onChangeProvisionConOc">
+									<items>
+										<c:Item key="1" text="Con documento SAP (OC/SOLPED/PA)"></c:Item>	
+										<c:Item key="0" text="Sin documento SAP (OC/SOLPED/PA)"></c:Item>								
+									</items>
+								</ComboBox>
+                            </f:fields>
+                            <f:label>
+                                <Label text="Tipo Doc. Compras" />
+                            </f:label>
+                        </f:FormElement>
+						
+						<f:FormElement label="{i18n>ocsolpedpa}">
+							<f:fields>
+								<Input	id="txtSustento"
+										type="Number"
+										maxLength="10"
+										value="{provisionDetModel>/sustento}"
+									   	enabled="{= 
+                                                   ${provisionDetModel>/provisionConOC} === '1'
+                                                }"/>
+								<Input 	id="txtProvisionOC"
+										type="Number"
+										value="{provisionDetModel>/posicion}" placeholder="Posición"
+										enabled="{= 
+                                                   ${provisionDetModel>/provisionConOC} === '1'
+                                                }"
+										maxLength="5">
+									<layoutData>
+										<l:GridData span="XL2 L3 M3 S5" />
+									</layoutData>
+								</Input>
+								<!-- <Button icon="sap-icon://search" 
+										enabled="{= ${provisionDetModel>/provisionConOC} === '1' }"
+										press="onSearchOC"
+										type="Emphasized">
+									<layoutData>
+										<l:GridData span="XL1 L1 M1 S1" />
+									</layoutData>
+								</Button> -->
+								<Button icon="sap-icon://search" 
+										enabled="false"
+										press="onSearchOC"
+										type="Emphasized">
+									<layoutData>
+										<l:GridData span="XL1 L1 M1 S1" />
+									</layoutData>
+								</Button>
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement>
+                            <f:fields>
+                                <!-- <Input value="{provisionDetModel>/proveedor}"
+                                    id="idInputProveedor">
+                                </Input> -->
+                                <Input 
+                                    id="idInputProveedor"
+									maxLength="10"
+                                    value="{provisionDetModel>/proveedor}"
+                                    showSuggestion="true"
+                                    busyIndicatorDelay="0"
+                                    filterSuggests="false"
+                                    suggest="onSuggestProveedor"
+                                    suggestionItems="{
+                                        path:'/proveedores',
+                                        limit:10
+                                    }">
+                                    <c:ListItem text="{Lifnr} - {Name1}" key="{Saknr}" />
+                                </Input>
+                            </f:fields>
+                            <f:label>
+                                <Label text="Cod. Proveedor" />
+                            </f:label>
+                        </f:FormElement>
+						
+						<f:FormElement label="Rubro">
+							<f:fields>
+								<!-- <Input editable="false" value="{provisionDetModel>/rubro}" /> -->
+								<ComboBox
+									id="cbRubro"
+									items="{
+										path: 'aRubro>/'
+									}"
+									selectedKey="{provisionDetModel>/rubro}"
+									change="changeRubro">
+										<c:Item key="{aRubro>rubro}" text="{aRubro>rubro}"></c:Item>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						
+						<!-- CUENTA CONTABLE 2 INPUTS -->
+						<f:FormElement label="Cuenta Contable" visible="{modeControl>/inputView}">
+							<f:fields>
+                                <Input 
+                                    id="idInputCuentaContable"
+									maxLength="10"
+									enabled="{= 
+                                                   ${provisionDetModel>/provisionConOC} === '0'
+                                                }"
+                                    value="{provisionDetModel>/cuentaContable}"
+                                    showSuggestion="true"
+                                    busyIndicatorDelay="0"
+                                    filterSuggests="false"
+                                    suggest="onSuggestCuentaContable"
+									change="onGetRubroSinOc"
+                                    suggestionItems="{
+                                        path:'/cuentasContable',
+                                        limit:10
+                                    }">
+                                    <c:ListItem text="{Saknr} - {Txt50}" key="{Saknr}" />
+                                </Input>
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement label="Cuenta Contable" visible="{modeControl>/comboBoxView}">
+							<f:fields>
+								<ComboBox
+                                    id="idCboCuentaContable"
+									placeholder="Seleccionar"
+									selectedKey="{provisionDetModel>/cuentaContable}"
+									items="{
+                                        path:'/cuentasContable'
+                                    }">
+									<c:Item text="{descripcion}" key="{key}" />
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+
+						<!-- CENTRO DE COSTO 2 INPUTS -->
+						<f:FormElement label="Centro de Costo" visible="{modeControl>/inputView}">
+							<f:fields>
+								<!-- <Input value="{provisionDetModel>/centroCosto}"/> -->
+                                <Input 
+                                    id="idInputCentroCosto"
+									maxLength="10"
+									enabled="{= 
+                                                   ${provisionDetModel>/provisionConOC} === '0'
+                                                }"
+                                    value="{provisionDetModel>/centroCosto}"
+                                    showSuggestion="true"
+                                    busyIndicatorDelay="0"
+                                    filterSuggests="false"
+                                    suggest="onSuggestCentroCosto"
+									change="onGetRubroSinOc"
+                                    suggestionItems="{
+                                        path:'/centrosCosto',
+                                        limit:10
+                                    }">
+                                    <c:ListItem text="{Kostl} - {Ktext}" key="{Kostl}" />
+                                </Input>
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement label="Centro de Costo" visible="{modeControl>/comboBoxView}">
+							<f:fields>
+								<ComboBox
+                                    id="idCboCentroCosto"
+									placeholder="Seleccionar"
+									selectedKey="{provisionDetModel>/centroCosto}"
+									items="{
+                                        path:'/centrosCosto'
+                                    }">
+									<c:Item text="{descripcion}" key="{key}" />
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+
+						<!-- CENTRO GESTOR 2 INPUTS -->
+						<f:FormElement label="Centro Gestor" visible="{modeControl>/inputView}">
+							<f:fields>
+								<Input 
+									id="txtCentroGestor"
+									maxLength="16"
+									value="{provisionDetModel>/centroGestor}"
+									enabled="{= 
+                                                   ${provisionDetModel>/provisionConOC} === '0'
+                                                }"
+									showSuggestion="true"
+                                    busyIndicatorDelay="0"
+                                    filterSuggests="false"
+                                    suggest="onSuggestCentroGestor"
+									change="onGetRubroSinOc"
+                                    suggestionItems="{
+                                        path:'/centroGestor',
+                                        limit:10
+                                    }">
+                                    <c:ListItem text="{BESCHR} - {FICTR}" key="{BESCHR}" />
+                                </Input>
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement label="Centro Gestor" visible="{modeControl>/comboBoxView}">
+							<f:fields>
+								<ComboBox
+                                    id="idCboCentroGestor"
+									placeholder="Seleccionar"
+									selectedKey="{provisionDetModel>/centroGestor}"
+									items="{
+                                        path:'/centroGestor'
+                                    }">
+									<c:Item text="{descripcion}" key="{key}" />
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						
+						<!-- ORDEN INTERNA 2 INPUTS -->
+						<f:FormElement label="Orden Interna" visible="{modeControl>/inputView}">
+							<f:fields>
+								<Input 
+									id="txtOrdenInterna"
+									maxLength="12"
+									value="{provisionDetModel>/ordenInterna}" 
+									enabled="{= 
+                                                   ${provisionDetModel>/provisionConOC} === '0'
+                                                }"
+									showSuggestion="true"
+                                    busyIndicatorDelay="0"
+                                    filterSuggests="false"
+                                    suggest="onSuggestOrdenInterna"
+									change="onGetRubroSinOc"
+                                    suggestionItems="{
+                                        path:'/ordenInterna',
+                                        limit:10
+                                    }">
+                                    <c:ListItem text="{AUFNR} - {KTEXT}" key="{AUFNR}" />
+                                </Input>
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement label="Orden Interna" visible="{modeControl>/comboBoxView}">
+							<f:fields>
+								<ComboBox
+                                    id="idCboOrdenInterna"
+									placeholder="Seleccionar"
+									selectedKey="{provisionDetModel>/ordenInterna}"
+									items="{
+                                        path:'/ordenInterna'
+                                    }">
+									<c:Item text="{descripcion}" key="{key}" />
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+
+					</f:formElements>
+				</f:FormContainer>
+				<f:FormContainer title="">
+					<f:formElements>
+						<f:FormElement label="Desc. de Servicio">
+							<f:fields>
+								<Input id="txtDescServicio" value="{provisionDetModel>/descripcionServicio}"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement>
+								<f:fields>
+									<DatePicker
+										id="idDpPeriodo"
+										change = "onChangeMesServicio"
+										value="{
+											'path': 'provisionDetModel>/periodoGasto',
+											'type': 'sap.ui.model.type.Date',
+											'formatOptions': {
+												'pattern': 'MM-y'
+											}
+										}"/>
+								</f:fields>
+								<f:label>
+									<Label text="Mes de Servicio" />
+								</f:label>
+						</f:FormElement>
+						<f:FormElement label="Sustento Retraso" visible="{worklistViewDetProvision>/bSustentoRetraso}">
+							<f:fields>
+								<Input value="{provisionDetModel>/sustentoRetraso}" />
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="Monto">
+							<f:fields>
+								<Input id="txtMonto"
+									value="{ path: 'provisionDetModel>/monto',
+									type: 'sap.ui.model.type.Float',
+									formatOptions: { decimals: 2,
+										style: 'standard',
+										decimalSeparator: '.',
+										groupingEnabled: true,
+										groupingSeparator: ',',
+										minFractionDigits: 2,
+										maxFractionDigits: 2
+									}
+								}" 
+								liveChange=".onLiveChange"
+								/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Moneda">
+							<f:fields>
+								<ComboBox id="cboMoneda" selectedKey="{provisionDetModel>/moneda}">
+									<items>
+										<c:Item key="PEN" text="PEN"></c:Item>
+										<c:Item key="USD" text="USD"></c:Item>
+									</items>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="Sustento (max. 1000 caracteres):">
+							<f:fields>
+								<TextArea value="{provisionDetModel>/sustentoText}" rows="3" maxLength="1000" />
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement label="{i18n>tipoGasto}">
+							<f:fields>
+								<ComboBox
+									id="cboTipoGasto"
+									items="{
+										path: '/TiposGasto'
+									}"
+									selectedKey="{provisionDetModel>/idTipoGasto_idTipoGasto}">
+											<c:Item key="{idTipoGasto}" text="{descripcion}"></c:Item>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+
+						<f:FormElement label="{i18n>tipoServicio}">
+							<f:fields>
+								<ComboBox
+									id="cboTipoServicio"
+									items="{
+										path: '/TiposServicio'
+									}"
+									selectedKey="{provisionDetModel>/idTipoServicio_idTipoServicio}">
+											<c:Item key="{idTipoServicio}" text="{descripcion}"></c:Item>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+
+                        <f:FormElement label="">
+                            <Button id="agreInd" enabled="true" type="Negative" text="Agregar" icon="sap-icon://add" press="onAddDetalle"/>
+                            <Button type="Reject" text="Limpiar" icon="sap-icon://clear-all" press="onCleanFormDetalle"/>
+                        </f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+</c:FragmentDefinition>

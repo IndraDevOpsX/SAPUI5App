@@ -1,0 +1,130 @@
+<mvc:View
+	controllerName="com.indra.gestionprovisiones.controller.Provision"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f">
+
+    <f:DynamicPage 
+        id="idNuevaSolicitudPage"
+        showFooter="true"
+        busy="{nuevaSolView>/busy}"
+        busyIndicatorDelay="{nuevaSolView>/delay}">
+        <f:title>
+            <f:DynamicPageTitle
+                backgroundDesign="Solid"
+            >
+                <f:heading>
+                    <Title
+                        text="{i18n>provision}"
+                        level="H2"
+                        wrapping="true"/>
+                </f:heading>
+                <f:navigationActions>
+                    <Button
+                        icon="sap-icon://decline"
+                        type="Reject"
+                        text=""
+                        press=".onNavBack" />
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader
+                backgroundDesign="Solid"
+                busyIndicatorDelay="0"
+                busy="{nuevaSolView>busy}">
+                <f:content>
+                   
+                </f:content>
+            </f:DynamicPageHeader>           
+        </f:header>
+        <f:content>
+            <IconTabBar
+                headerMode="Inline"
+                upperCase="true">
+                <items>
+                    <IconTabFilter text="Provisión" icon="sap-icon://provision" >
+                        <VBox id="idFormRegistro">
+                            <Panel
+                                headerText="Datos Generales"
+                                class="sapUiTinyMarginBottom">
+                                <content>
+                                    <core:Fragment id="fDatosGeneralesProvision" fragmentName="com.indra.gestionprovisiones.view.provision.DatosGenerales" type="XML" />
+                                </content>
+                            </Panel>
+                            <Panel visible="{= ${provisionCabModel>/idEstadoProvision_idEstadoProvision} === 2 
+                                                &amp;&amp; !${provisionCabModel>/indicadorProvision}
+                                            }"
+                                expandable="true"
+                                expanded="false"
+                                headerText="Ingreso Individual"
+                                class="sapUiTinyMarginBottom">
+                                <content>
+                                    <core:Fragment fragmentName="com.indra.gestionprovisiones.view.provision.ObjectProvision" type="XML" />
+                                </content>
+                            </Panel>
+                            <Panel visible="{= !${provisionCabModel>/indicadorNoProvision} }"
+                                expanded="true"
+                                headerText="Detalle de Provision"
+                                class="sapUiTinyMarginBottom">
+                                <content>
+                                    <core:Fragment id="frgDetalleProvision" fragmentName="com.indra.gestionprovisiones.view.provision.DetalleProvision" type="XML" />
+                                </content>
+                            </Panel>
+                        </VBox>
+                    </IconTabFilter>
+                    <IconTabFilter text="Resumen" icon="sap-icon://activity-items" visible="{= !${provisionCabModel>/indicadorNoProvision} }">
+                        <Panel
+                            expanded="true"
+                            headerText="Resumen"
+                            class="sapUiTinyMarginBottom">
+                            <content>
+                                <core:Fragment id="frgResumenProvision" fragmentName="com.indra.gestionprovisiones.view.provision.ResumenMontos" type="XML" />
+                            </content>
+                        </Panel>
+                    </IconTabFilter>
+                    <IconTabFilter text="Aprobación" icon="sap-icon://approvals" visible="{= !${provisionCabModel>/indicadorNoProvision} }">
+                        <Panel
+                            expandable="true"
+                            expanded="true"
+                            headerText="Flujo de Aprobación"
+                            class="sapUiTinyMarginBottom">
+                            <core:Fragment fragmentName="com.indra.gestionprovisiones.view.provision.FlujoProvision" type="XML" />
+                        </Panel>
+                    </IconTabFilter>
+                    <IconTabFilter text="Adjunto" icon="sap-icon://upload-to-cloud" >                    
+                        <Panel  
+                            headerText="Adjuntar Archivos"
+                            class="sapUiTinyMarginBottom">
+                            <content>
+                                <VBox id="contentContainerVisualice">
+                                <core:Fragment fragmentName="com.indra.gestionprovisiones.view.provision.AdjuntoArchivo" type="XML" />
+                                </VBox>
+                            </content>
+                        </Panel>                   
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+
+                
+        </f:content>
+        <f:footer>
+            <OverflowToolbar visible="{= ${provisionCabModel>/idEstadoProvision_idEstadoProvision} === 2 }" >
+                <Button 
+                    id="idButtonNuevo" 
+					icon="{ path: 'nuevaSolView>/icon', formatter: '.formatter.buttonIconFormatterPopover' }"
+					type="{ path: 'nuevaSolView>/type', formatter: '.formatter.buttonTypeFormatterPopover' }"
+					text= "{path: 'nuevaSolView>/text', formatter: '.formatter.highestSeverityMessagesPopover' }"
+                    visible="{= !!${message>/}.length}"
+					press="onHandlerMessagePopover"
+					ariaHasPopup="Dialog"/>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://save" enabled="{worklistViewDetProvision>/bSave}"  text="Guardar" press="onActualizarProvision" type="Negative"/>
+                <Button icon="sap-icon://decline" text="Cancelar" press="onNavBack" type="Reject"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>

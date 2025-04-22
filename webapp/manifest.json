@@ -1,0 +1,225 @@
+{
+    "_version": "1.49.0",
+    "sap.app": {
+        "id": "com.indra.gestionprovisiones",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.10.0",
+            "toolsId": "7ca18815-b0d2-4676-afe7-fdb405faf575"
+        },
+        "dataSources": {
+            "provisionService": {
+                "uri": "/odata/v2/provision",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "usuarioService": {
+                "uri": "/sap/opu/odata/sap/ZGW_MM_ACTIVOSFIJOS_NUEVASOL_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "empleadoService": {
+                "uri": "/sap/opu/odata/sap/ZGW_MM_ACTIVOSFIJOS_EMPLEADO_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "provisionSAPService": {
+                "uri": "/sap/opu/odata/sap/ZGW_GEST_PROVISIONES_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "AsigniacionService": {
+                "uri": "/odata/v2/mantenimientoprov",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "indra-com-gestionprovisiones-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "GestionProvisiones",
+                    "action": "Display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": "sap-icon://activity-2"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.115.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.indra.gestionprovisiones.i18n.i18n"
+                }
+            },            
+            "provisionModel":{
+                "dataSource": "provisionService",
+                "preload": true,
+                "settings": {}
+            },
+            "": {
+                "type": "sap.ui.model.json.JSONModel",
+                "preload": true
+            },
+            "usuarioModel":{
+                "dataSource": "usuarioService",
+                "preload": true,
+                "settings": {}
+            },
+            "empleadoModel": {
+                "dataSource": "empleadoService",
+                "preload": true,
+                "settings": {}
+            },
+            "provisionSAPModel": {
+                "dataSource": "provisionSAPService",
+                "preload": true,
+                "settings": {}
+            },
+            "asignacionModel": {
+                "dataSource": "AsigniacionService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.indra.gestionprovisiones.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteHome",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetHome"
+                    ]
+                },
+                {
+                    "name": "RouteNuevaProvision",
+                    "pattern": "RouteNuevaProvision",
+                    "target": "TargetNuevaProvision"
+                },
+                {
+                    "name": "Provision",
+                    "pattern": "Provision:?query:",
+                    "target": "TargetProvision"
+                }
+            ],
+            "targets": {
+                "TargetHome": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Home",
+                    "viewName": "Home"
+                },
+                
+                "TargetNuevaProvision": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewId": "NuevaProvision",
+                    "viewLevel": 2,
+                    "viewName": "provision.NuevaProvision"
+                },
+                
+                "TargetProvision": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewId": "Provision",
+                    "viewLevel": 2,
+                    "viewName": "provision.Provision"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "com.indra.gestionprovisiones.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "comindragestionprovisiones"
+    }
+}
