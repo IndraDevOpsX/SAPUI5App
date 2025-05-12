@@ -5,7 +5,7 @@ sap.ui.define([
 
     return Controller.extend("prueba.controller.Home", {
         onInit() {
-            //Prueba CI/CD III
+            //Prueba CI/CD Iv
         }
     });
 });
