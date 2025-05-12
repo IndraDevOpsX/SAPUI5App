@@ -1,47 +1,26 @@
-/**
- * eslint-disable @sap/ui5-jsdocs/no-jsdoc
- */
-
 sap.ui.define([
-        "sap/ui/core/UIComponent",
-        "sap/ui/Device",
-        "com/indra/gestionprovisiones/model/models"
-    ],
-    function (UIComponent, Device, models) {
-        "use strict";
+    "sap/ui/core/UIComponent",
+    "prueba/model/models"
+], (UIComponent, models) => {
+    "use strict";
 
-        jQuery.sap.includeScript("https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/jszip.js");
-        jQuery.sap.includeScript("https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js");
+    return UIComponent.extend("prueba.Component", {
+        metadata: {
+            manifest: "json",
+            interfaces: [
+                "sap.ui.core.IAsyncContentCreation"
+            ]
+        },
 
-        return UIComponent.extend("com.indra.gestionprovisiones.Component", {
-            metadata: {
-                manifest: "json"
-            },
+        init() {
+            // call the base component's init function
+            UIComponent.prototype.init.apply(this, arguments);
 
-            /**
-             * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
-             * @public
-             * @override
-             */
-            init: function () {
-                // call the base component's init function
-                UIComponent.prototype.init.apply(this, arguments);
+            // set the device model
+            this.setModel(models.createDeviceModel(), "device");
 
-                var userDataModel = new sap.ui.model.json.JSONModel();
-                    userDataModel.setData({
-                        "givenName": "",
-                        "familyName": "",
-                        "userId": "",
-                        "userAndName": ""
-                    });
-                this.setModel(userDataModel, "userData");
-
-                // enable routing
-                this.getRouter().initialize();
-
-                // set the device model
-                this.setModel(models.createDeviceModel(), "device");
-            }
-        });
-    }
-);
+            // enable routing
+            this.getRouter().initialize();
+        }
+    });
+});

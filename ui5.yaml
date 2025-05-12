@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
 
-specVersion: "2.6"
+specVersion: "3.1"
 metadata:
-  name: com.indra.gestionprovisiones
+  name: prueba
 type: application
 server:
   customMiddleware:
@@ -15,16 +15,6 @@ server:
             - /resources
             - /test-resources
           url: https://ui5.sap.com
-        backend:
-          - path: /odata/v2/
-            url: https://americamovilperus-a-c--hana-qas-xrxcinqk-hana-qas-claro206688a4.cfapps.br10.hana.ondemand.com
-            destination: provisioneshana
-          - path: /scim
-            url: https://aprtsnpor.accounts.ondemand.com
-            destination: IAS_SCIM_API
-          - path: /sap/opu/odata/sap/
-            url: http://eqa:8000
-            destination: ERP_CLARO_HTTP
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -34,9 +24,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: com.indra.gestionprovisiones
+        component: prueba
         ui5Theme: sap_horizon
-builder:
-  customTasks:
-    - name: ui5-task-uglify
-      afterTask: replaceVersion

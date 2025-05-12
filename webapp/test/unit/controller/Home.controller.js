@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"comindra/gestionprovisiones/controller/Home.controller"
+	"prueba/controller/Home.controller"
 ], function (Controller) {
 	"use strict";
 
