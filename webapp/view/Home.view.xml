@@ -1,6 +1,6 @@
 <mvc:View controllerName="prueba.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page id="page" title="Este es mi titulo">
     </Page>
 </mvc:View>
